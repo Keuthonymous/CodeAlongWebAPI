@@ -10,55 +10,61 @@ namespace WebAPICodeAlong.Controllers
 {
     public class ValuesController : ApiController
     {
+        public static List<Book> b = new List<Book>()
+            {
+                    new Book
+                {
+
+                    ISBN = 1,
+                    Title = "SomeThing",
+                    Author = "Someone",
+                    Description = "A book",
+                    PublishedYear = 0001
+                },
+
+                    new Book
+                {
+
+                    ISBN = 2,
+                    Title = "SomeThing Else",
+                    Author = "Someone Else",
+                    Description = "Another book",
+                    PublishedYear = 0001
+                },
+                    new Book
+                {
+
+                    ISBN = 3,
+                    Title = "Another thing",
+                    Author = "Someone Different",
+                    Description = "That persons book",
+                    PublishedYear = 0001
+                },
+                    new Book
+                {
+
+                    ISBN = 4,
+                    Title = "The Bible",
+                    Author = "Someone imaginary",
+                    Description = "Fantasy",
+                    PublishedYear = 0001
+                }
+
+            };
         // GET api/values
         public IEnumerable<Book> Get()
         {
-            List<Book> b = new List<Book>() {
-                new Book
-            {
-
-                ISBN = 1,
-                Title = "SomeThing",
-                Author = "Someone",
-                Description = "A book",
-                PublishedYear = 0001
-            },
-
-                new Book
-            {
-
-                ISBN = 2,
-                Title = "SomeThing Else",
-                Author = "Someone Else",
-                Description = "Another book",
-                PublishedYear = 0001
-            },
-                new Book
-            {
-
-                ISBN = 3,
-                Title = "Another thing",
-                Author = "Someone Different",
-                Description = "That persons book",
-                PublishedYear = 0001
-            },
-                new Book
-            {
-
-                ISBN = 4,
-                Title = "The Bible",
-                Author = "Someone imaginary",
-                Description = "Fantasy",
-                PublishedYear = 0001
-            }};
-
             return b;
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public Book Get(int ISBN)
         {
-            return "value";
+            var query = (from books in b
+                         where books.ISBN == ISBN
+                         select books).FirstOrDefault();
+
+            return query;
         }
 
         // POST api/values
